@@ -139,6 +139,8 @@ jobs:
 ```` bash
 Muito cuidado com as credenciais, pois se não estiverem corretas o argo apontara erro
 ````
+<img width="1051" height="347" alt="credenciais" src="https://github.com/user-attachments/assets/69314d08-437b-477e-8a59-b305718ff760" />
+
 ---
 
 ## ***🧾 4. Repositório de Manifests (ArgoCD)***
@@ -204,6 +206,8 @@ spec:
    * **Namespace:** default
 3. Clique em **Create** e depois em **Sync**.
 
+<img width="1655" height="935" alt="argo" src="https://github.com/user-attachments/assets/b7ba9b98-3f40-463a-88f0-24aa3aaa92ff" />
+
 ---
 
 ## ***🔍 6. Testando o Deploy***
@@ -224,6 +228,8 @@ kubectl port-forward service/hello-service 8080:8080
 Acesse no navegador:
 👉 [http://localhost:8080/](http://localhost:8080/)
 
+<img width="1055" height="210" alt="pods" src="https://github.com/user-attachments/assets/ec10f49f-5942-4e87-af65-ec27601df318" />
+
 ---
 
 ## ***🧪 7. Testando o Pipeline (CI/CD)***
@@ -241,6 +247,9 @@ git add .
 git commit -m "Atualiza mensagem da aplicação"
 git push origin main
 ```
+<img width="1426" height="180" alt="atulizarmen" src="https://github.com/user-attachments/assets/b76782de-21f3-4706-b31d-61e0b2c48ab3" />
+
+<img width="642" height="191" alt="capturaMensagem" src="https://github.com/user-attachments/assets/8b64e59d-e4ed-44fd-af8b-5940fdcf8abd" />
 
 3. A pipeline será executada automaticamente:
 
@@ -252,13 +261,9 @@ git push origin main
 
 ## ***📸 8. Evidências Esperadas***
 
-| Evidência                                | Descrição                                |
-| ---------------------------------------- | ---------------------------------------- |
-| ✅ **Workflow do GitHub Actions**         | Print mostrando execução com sucesso     |
-| ✅ **Docker Hub**                         | Print com a nova imagem e tag atualizada |
-| ✅ **Commit no repositório de manifests** | Mostrando atualização da imagem          |
-| ✅ **ArgoCD sincronizado**                | Print do app atualizado                  |
-| ✅ **kubectl get pods**                   | Mostrando pod rodando                    |
-| ✅ **Resposta via navegador**             | Mensagem “Hello Compass UOL!” exibida    |
+<img width="1332" height="835" alt="atulzarimagem" src="https://github.com/user-attachments/assets/2f31510a-d758-4836-8d27-447a6d442285" />
+
+<img width="902" height="713" alt="dockerhub" src="https://github.com/user-attachments/assets/34cec897-667b-4457-b235-c0307b04ad64" />
+
 
 ---
