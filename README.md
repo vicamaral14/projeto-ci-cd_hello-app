@@ -194,21 +194,76 @@ spec:
 
 ## ***🔄 5. Criar o Aplicativo no ArgoCD***
 
-1. Acesse o painel do ArgoCD:
-   👉 `http://localhost:8080`
-2. Clique em **NEW APP** e preencha:
+### 🧩 **Instalação do ArgoCD (caso ainda não esteja instalado)**
 
-   * **Application Name:** hello-app
-   * **Project:** default
+> ⚠️ Se o ArgoCD já estiver instalado no seu ambiente Kubernetes, pule esta etapa.
+
+Execute os comandos abaixo no **PowerShell** (com o `kubectl` já configurado no Windows):
+
+```powershell
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+---
+
+### 🌐 **Acesso ao painel do ArgoCD (via port-forward)**
+
+Para acessar o painel web do ArgoCD, redirecione a porta **8080** para o serviço interno **argocd-server**:
+
+```powershell
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+Em seguida, abra o navegador e acesse:
+👉 [https://localhost:8080](https://localhost:8080)
+
+> Como o ArgoCD utiliza **HTTPS por padrão**, pode ser necessário **aceitar o aviso de segurança** do navegador ao acessar `localhost`.
+
+---
+
+### 🔐 **Obter credenciais de acesso**
+
+* **Usuário padrão:** `admin`
+* **Senha inicial:** use o comando abaixo para visualizar a senha gerada automaticamente:
+
+```powershell
+kubectl -n argocd get secret argocd-initial-admin-secret `
+  -o jsonpath="{.data.password}" | `
+  ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) }
+```
+
+A senha será exibida no terminal.
+Use-a para fazer login no painel do ArgoCD.
+
+---
+
+### 🚀 **Criando o aplicativo no ArgoCD**
+
+1. Acesse o painel do ArgoCD:
+   👉 [https://localhost:8080](https://localhost:8080)
+
+2. Clique em **NEW APP** e preencha as informações abaixo:
+
+   * **Application Name:** `hello-app`
+   * **Project:** `default`
    * **Repository URL:** [projeto-ci-cd_manifests](https://github.com/vicamaral14/projeto-ci-cd_manifests)
    * **Path:** `./`
    * **Cluster:** [https://kubernetes.default.svc](https://kubernetes.default.svc)
-   * **Namespace:** default
-3. Clique em **Create** e depois em **Sync**.
+   * **Namespace:** `default`
+
+3. Clique em **Create** e depois em **Sync** para realizar o deploy automático.
+
+---
+
+### 🖼️ **Exemplo do painel ArgoCD**
 
 <img width="1655" height="935" alt="argo" src="https://github.com/user-attachments/assets/b7ba9b98-3f40-463a-88f0-24aa3aaa92ff" />
 
 ---
+
+💡 *Após o sync, o ArgoCD vai clonar o repositório de manifests e aplicar automaticamente o deployment e service no cluster Kubernetes.*
+
 
 ## ***🔍 6. Testando o Deploy***
 
