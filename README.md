@@ -1,11 +1,25 @@
-## Projeto CI/CD com GitHub Actions
-🧩 Objetivo do Projeto
+# 🚀 **Projeto CI/CD com GitHub Actions**
+
+**Programa de Bolsas – Compass UOL | DevSecOps | Abril 2025**
+
+---
+
+## ***📝 Descrição do Projeto***
+
+O projeto foi desenvolvido como parte da trilha de **CI/CD** no Programa de Bolsas da Compass UOL – DevSecOps.
+
+O objetivo principal é implementar um pipeline completo de **Integração Contínua e Entrega Contínua (CI/CD)** utilizando:
 
 * **GitHub Actions** para automação de build e push da imagem Docker;
 * **Docker Hub** como repositório de imagens;
 * **ArgoCD** para entrega contínua em **Kubernetes local (Rancher Desktop)**.
 
 A aplicação desenvolvida é uma API simples com **FastAPI**, que retorna uma mensagem de saudação.
+
+> 🔗 Este projeto é composto por **dois repositórios GitHub**:
+>
+> * **Aplicação e pipeline CI/CD:** [projeto-ci-cd_hello-app](https://github.com/vicamaral14/projeto-ci-cd_hello-app)
+> * **Manifests do ArgoCD:** [projeto-ci-cd_manifests](https://github.com/vicamaral14/projeto-ci-cd_manifests)
 
 ---
 
@@ -27,8 +41,7 @@ Antes de começar, você precisa ter instalado e configurado:
 
 ## ***🧱 2. Criando a Aplicação FastAPI***
 
-1. Crie um novo repositório no GitHub, por exemplo:
-   `projeto-ci-cd_hello-app`
+1. Crie o repositório [projeto-ci-cd_hello-app](https://github.com/vicamaral14/projeto-ci-cd_hello-app).
 
 2. Adicione o arquivo `main.py`:
 
@@ -107,7 +120,7 @@ jobs:
       - name: Atualizar manifests no outro repositório
         uses: actions/checkout@v3
         with:
-          repository: seu_usuario/hello-manifests
+          repository: vicamaral14/projeto-ci-cd_manifests
           token: ${{ secrets.SSH_PRIVATE_KEY }}
           path: manifests
 
@@ -132,10 +145,9 @@ jobs:
 
 ## ***🧾 4. Repositório de Manifests (ArgoCD)***
 
-Crie um **segundo repositório** no GitHub chamado:
-📁 `hello-manifests`
+Crie o repositório [projeto-ci-cd_manifests](https://github.com/vicamaral14/projeto-ci-cd_manifests).
 
-Adicione os seguintes arquivos:
+Adicione os arquivos:
 
 **deployment.yaml**
 
@@ -184,15 +196,15 @@ spec:
 
 1. Acesse o painel do ArgoCD:
    👉 `http://localhost:8080`
-2. Clique em **NEW APP** e preencha os campos:
+2. Clique em **NEW APP** e preencha:
 
    * **Application Name:** hello-app
    * **Project:** default
-   * **Repository URL:** repositório `hello-manifests`
+   * **Repository URL:** [projeto-ci-cd_manifests](https://github.com/vicamaral14/projeto-ci-cd_manifests)
    * **Path:** `./`
    * **Cluster:** [https://kubernetes.default.svc](https://kubernetes.default.svc)
    * **Namespace:** default
-3. Clique em **Create** e depois em **Sync** para implantar.
+3. Clique em **Create** e depois em **Sync**.
 
 ---
 
@@ -221,7 +233,7 @@ Acesse no navegador:
 1. Edite o arquivo `main.py`:
 
 ```python
-return {"message": "Hello Compass UOL!"}
+return {"message": "Nova mensagem! Deploy automatizado com sucesso!"}
 ```
 
 2. Faça commit e push:
@@ -235,7 +247,7 @@ git push origin main
 3. A pipeline será executada automaticamente:
 
    * 🔧 Build e push da nova imagem para o Docker Hub
-   * 🔄 Atualização automática dos manifests
+   * 🔄 Atualização automática dos manifests ([projeto-ci-cd_manifests](https://github.com/vicamaral14/projeto-ci-cd_manifests))
    * 🚀 Deploy automatizado via ArgoCD
 
 ---
@@ -249,4 +261,6 @@ git push origin main
 | ✅ **Commit no repositório de manifests** | Mostrando atualização da imagem          |
 | ✅ **ArgoCD sincronizado**                | Print do app atualizado                  |
 | ✅ **kubectl get pods**                   | Mostrando pod rodando                    |
-| ✅ **Resposta via navegador**             | Mensagem “Hello Compass UOL!” exib       |
+| ✅ **Resposta via navegador**             | Mensagem “Hello Compass UOL!” exibida    |
+
+---
