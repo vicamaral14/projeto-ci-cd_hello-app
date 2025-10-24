@@ -1,13 +1,8 @@
 # 🚀 **Projeto CI/CD com GitHub Actions**
 
-**Programa de Bolsas – Compass UOL | DevSecOps | Abril 2025**
-
 ---
 
 ## ***📝 Descrição do Projeto***
-
-O projeto foi desenvolvido como parte da trilha de **CI/CD** no Programa de Bolsas da Compass UOL – DevSecOps.
-
 O objetivo principal é implementar um pipeline completo de **Integração Contínua e Entrega Contínua (CI/CD)** utilizando:
 
 * **GitHub Actions** para automação de build e push da imagem Docker;
@@ -140,7 +135,10 @@ jobs:
    * `DOCKER_USERNAME`
    * `DOCKER_PASSWORD`
    * `SSH_PRIVATE_KEY`
-
+     
+```` bash
+Muito cuidado com as credenciais, pois se não estiverem corretas o argo apontara erro
+````
 ---
 
 ## ***🧾 4. Repositório de Manifests (ArgoCD)***
